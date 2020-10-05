@@ -1,13 +1,12 @@
 class PostsController < ApplicationController
 
   def index  # indexアクションを定義した(ルーティングに対応するアクション)
-    @posts = Post.all  # すべてのレコードを@postsに代入
+    @posts = Post.all.order(id: "DESC")  # すべてのレコードを@postsに代入(DESC=降順)
   end
 
-  def new #newページを表示させるだけなのでこのまま
+  def create
+    Post.create(content: params[:content])
+    redirect_to action: :index #メモを保存した後にページにリダイレクト
   end
 
-  def create #新規投稿をしたときのメソッドアクション
-    Post.create(content: params[:content])　#フォームから送信されたパラメータを利用してparamsの情報を保存
-  end
 end
