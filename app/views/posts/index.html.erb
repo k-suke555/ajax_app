@@ -4,8 +4,8 @@
   <%= form.submit '投稿する' , id: "submit" %>
 <% end %>
 
-<% @posts.each do |post| %> #@posts(全部)の中の一部postを抜き出したい
-  <div class="post">
+<% @posts.each do |post| %> <!--@posts(全部)の中の一部postを抜き出したい-->
+  <div class="post" data-id=<%= post.id %> data-check=<%= post.checked %>> <!--memo部分のブロック。前者にはメモのid、後者には既読の有無を確認するcheckedカラムの情報-->
     <div class="post-date">
       投稿日時：<%= post.created_at %>
     </div>
