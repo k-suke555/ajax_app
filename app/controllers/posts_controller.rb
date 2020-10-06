@@ -9,4 +9,15 @@ class PostsController < ApplicationController
     redirect_to action: :index #メモを保存した後にページにリダイレクト
   end
 
+  def checked
+    post = Post.find(params[:id]) #既読したidのメモが渡されるように設定
+    if post.checked #既読であるかどうかチェックするプロパティ
+      post.update(checked: false) #既読であれば解除するためにfalse
+    else
+      post.update(checked: true) #既読でなければ解除のためtrue
+    end
+
+    item = Post.find(params[:id]) #更新したレコードを取得
+    render json: { post: item } #JSON型式（データ）としてchecked.jsに返却
+  end
 end
